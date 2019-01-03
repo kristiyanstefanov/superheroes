@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript" src="superhero.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+
+
+</head>
+
+<body>
+      
+       
+                <iframe id="mus" width="0" height="0" volume="0.5" src=""
+                    frameborder="0"></iframe>
+          
+            
+    
+    
+
+    <canvas id="canvas"></canvas>
+
+    <div class="card">
+        <a id="buttonback" class="buttonback">&lt;</a>
+        <a id="buttonnext" class="buttonnext">&gt;</a>
+        <input type="button" id="buttonstats" class="buttonstats" value="show stats"></a>
+        <div class="avatar"></div>
+        <div class="stats"></div>
+        <div class="name"></div>
+        <div class="info"></div>
+
+    </div>
+
+    <div class="bonus">
+        <ul id="statsur"></ul>
+     
+    
+    </div>
+
+
+
+
+
+
+
+    
+    <script>
+        $(document).ready(function () {
+
+            
+
+            let visibility = true;
+            let div = $(".card");
+            let sta = $(".bonus");
+            let count = 1;
+            let stavisibility = false;
+            view();
+            
+            function show() {
+                div.animate({ height: '50px', opacity: '0.2' }, "fast");
+                div.animate({ width: '50px', opacity: '0.2' }, "fast");
+                div.animate({ height: '800px', opacity: '0.8' }, "fast");
+                div.animate({ width: '800px', opacity: '0.8' }, "fast");
+            }
+
+            function showstats() {
+                sta.animate({ height: '100', opacity: '0.4' }, "slow");
+                sta.animate({ width: '100', opacity: '0.8' }, "slow");
+                sta.animate({ height: '250', opacity: '0.4' }, "slow");
+                sta.animate({ width: '240', opacity: '0.8' }, "slow");
+
+
+            }
+            function hidestats() {
+                sta.animate({ height: '0', opacity: '0.4' }, "fast");
+                sta.animate({ width: '0', opacity: '0.8' }, "fast");
+                sta.animate({ height: '0px', opacity: '0.4' }, "fast");
+                sta.animate({ width: '0px', opacity: '0.8' }, "fast");
+            }
+
+            $("#buttonsort").click(function (){
+                sortList();
+            })
+
+            $("#buttonnext").click(function () {
+                count++;
+                if (count > 3) {
+                    count = 1;
+                }
+                hidden();
+                hideStats();
+                changeNext();
+
+            });
+
+            $("#buttonback").click(function () {
+
+                count--
+                if (count < 1) {
+                    count = 3;
+                }
+                hidden();
+                hideStats();
+                changeNext();
+                chMusic();
+
+            });
+
+            $("#buttonstats").click(function () {
+                hiddenStats();
+                change();
+            });
+
+
+            function view() {
+                visibility = true;
+                show();
+
+                switch (count) {
+                    case 1:
+                        $(".info").append(document.createTextNode(heroes.flash.description));
+                        $(".name").append(document.createTextNode(heroes.flash.name));
+                        $('.avatar').css("background-image", "url(https://cdn1us.denofgeek.com/sites/denofgeekus/files/styles/main_wide/public/the_flash_0.jpeg?itok=uU2iq0i7)");
+                        $('.card').css("background-image", "url(https://static.parade.com/wp-content/uploads/2017/06/Red-Sprite-Lightning-FTR.jpg)");
+                        $('body').css("background-image", "url('https://historytime.ru/wp-content/uploads/2016/03/flesh.jpg')");
+                        $(".buttonback").css("background", "#DC143C");
+                        $(".buttonnext").css("background", "#DC143C");
+                        $(".buttonstats").css("background", "#DC143C");
+                        $("#statsur").append('Speed:'  + heroes.flash.speed);
+                        $("#statsur").append(" Strength: " + heroes.flash.strength);
+                        $("#statsur").append(" Intelligence : " + heroes.flash.intelligence);
+                        $("#statsur").append(" Goodness : " + heroes.flash.goodness);
+                        $("#statsur").append(" Overall : " + heroes.flash.overall);
+                        flMusic();
+                        break;
+
+                    case 2:
+
+                        $(".info").append(document.createTextNode(heroes.arrow.description));
+                        $(".name").append(document.createTextNode(heroes.arrow.name));
+                        $('.avatar').css("background-image", "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDZM4mpOUXwhkcQBp6YHg4TNSjGSYUEebuZdjxn6PbAPzJ31FD')");
+                        $('.card').css("background-image", "url('https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/ggZAv9L/dark-clouds-rain-and-lightning_n1tmxm4___F0000.png')")
+                        $('body').css("background-image", "url('http://wallpapersboom.net/wp-content/uploads/2015/03/1905_green_arrow.jpg')")
+                        $('body').append($(".darkness"));
+                        $(".buttonback").css("background", "#006400");
+                        $(".buttonnext").css("background", "#006400");
+                        $(".buttonstats").css("background", "#006400");
+                        $("#statsur").append(" Strength: " + heroes.arrow.strength);
+                        $("#statsur").append(" Intelligence : " + heroes.arrow.intelligence);
+                        $("#statsur").append(" Goodness : " + heroes.arrow.goodness);
+                        $("#statsur").append(" Overall : " + heroes.arrow.overall);
+                        arMusic();
+                        break;
+
+                        case 3:
+
+                        $(".info").append(document.createTextNode(heroes.batwoman.description));
+                        $(".name").append(document.createTextNode(heroes.batwoman.name));
+                        $('.avatar').css("background-image", "url('https://pmctvline2.files.wordpress.com/2018/10/batwoman-costume-featured.jpg?w=620')");
+                        $('.card').css("background-image", "url('https://e3.365dm.com/18/03/1096x616/skynews-lightning-istock-image_4253284.jpg?20180311200605')")
+                        $('body').css("background-image", "url('https://i.pinimg.com/originals/62/bf/84/62bf84421129971b4d7cd686f1169814.jpg')")
+                        $('body').append($(".darkness"));
+                        $(".buttonback").css("background", "#9370DB");
+                        $(".buttonnext").css("background", "#9370DB");
+                        $(".buttonstats").css("background", "#9370DB");
+                        $("#statsur").append(" Strength: " + heroes.batwoman.strength);
+                        $("#statsur").append(" Intelligence : " + heroes.batwoman.intelligence);
+                        $("#statsur").append(" Goodness : " + heroes.batwoman.goodness);
+                        $("#statsur").append(" Overall : " + heroes.batwoman.overall);
+                        bwMusic();
+                        break;
+                }
+
+            };
+
+            function hidden() {
+                if (visibility) {
+                    visibility = false;
+
+                    $(".info").empty();
+                    $(".name").empty();
+                    $("#statsur").empty();
+                    console.log("wuuuuuut")
+
+                }
+                view()
+            };
+
+
+            function hiddenStats() {
+                if (stavisibility == false) {
+                    stavisibility = true;
+                    showstats();
+                    console.log("pROBA TRUE");
+                    
+
+                } else {
+                    stavisibility = false;
+                    hidestats();
+                    console.log("pROBA false")
+
+                }
+
+            };
+
+            function hideStats() {
+                stavisibility = false;
+                hidestats();
+
+
+
+            };
+
+        });
+
+
+    </script>
+
+</body>
+
+</html>
